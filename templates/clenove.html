@@ -1,0 +1,36 @@
+{% extends "_base.html" %}
+{% block title %}Členové – Knihovna{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 fw-bold mb-0" style="color:var(--brand)">
+    <i class="bi bi-people-fill me-2"></i>Členové
+  </h1>
+  <a href="{{ url_for('pridat_clena') }}" class="btn btn-success">
+    <i class="bi bi-person-plus me-1"></i>Přidat člena
+  </a>
+</div>
+<div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>#</th><th>Jméno</th><th>E-mail</th><th>Aktivní výpůjčky</th></tr></thead>
+        <tbody>
+          {% for c in clenove %}
+          <tr>
+            <td class="text-muted">{{ loop.index }}</td>
+            <td class="fw-semibold">{{ c.plne_jmeno }}</td>
+            <td>{{ c.email }}</td>
+            <td>
+              {% set pocet = c.pujcky.filter_by(datum_skutecneho_vraceni=None).count() %}
+              <span class="badge {{ 'bg-danger' if pocet else 'bg-secondary' }} rounded-pill">{{ pocet }}</span>
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="4" class="text-center text-muted py-4">Žádní členové.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

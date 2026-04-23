@@ -1,0 +1,14 @@
+:root {
+  --brand: #2c5f2e;
+  --brand-soft: #e8f0e9;
+  --accent: #d4a017;
+}
+body { background-color: #f5f4f0; font-family: Georgia, serif; }
+.navbar { background: var(--brand) !important; }
+.table thead th {
+  background: var(--brand);
+  color: #fff;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
